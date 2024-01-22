@@ -68,7 +68,7 @@ const GetAnswer = async (questions, knowledgebase) => {
 import express from 'express';
 const app = express()
 app.use(express.json())
-const port = 3030
+const port = process.env.PORT || 3030
 
 app.get('/', (req, res) => {
     console.log('ksdjfksjdf');
