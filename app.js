@@ -1,4 +1,5 @@
 import { OpenAI } from 'langchain/llms/openai'
+import cors from 'cors';
 import { VectorDBQAChain } from 'langchain/chains'
 import { MemoryVectorStore } from "langchain/vectorstores/memory";
 import { OpenAIEmbeddings } from 'langchain/embeddings/openai'
@@ -7,28 +8,9 @@ import * as fs from "fs"
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-process.env.OPENAI_API_KEY = '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';
+process.env.OPENAI_API_KEY = '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';
 
 const GetAnswer = async (questions, knowledgebase) => {
-
-    // const jsonData = [
-    //     {
-    //         "id": 1,
-    //         "knowledgebase": "Hai, saya adalah BOT Helpdesk yang akan membantu kamu jika mengalami permasalahan yang perlu ditangani oleh TIM IT."
-    //     },
-    //     {
-    //         "id": 2,
-    //         "knowledgebase": "Tahapan untuk mengatasi lupa password pada website Wzone: 1. Mengunjungi wzone 2. Klik tombol lupa password 3. Mengisi email. 4. Link reset password akan dikirimkan ke email anda. 5. Cek email ada secara berkala. 6. Klik link yang dikirimkan via email. 7. Masukan password baru untuk mereset password."
-    //     },
-    //     {
-    //         "id": 3,
-    //         "knowledgebase": "jika pertanyaan bukan merujuk untuk nanya, jawablah dengan AI, dan jika pertanyaan berada diluar konteks dari data yang diberikan, berikan pesan 'Pertanyaan anda diluar konteks HELPDESK, silahkan mengajukan tiket jika dirasa perlu dijawab oleh TIM IT' serta berikan juga tombol link html yang mengarah pada link https://sla/create-ticket"
-    //     },
-    //     {
-    //         "id": 4,
-    //         "knowledgebase": "bersikaplah dengan ramah."
-    //     }
-    // ];
 
     // Gabungkan konten dari setiap item menjadi satu teks
     const combinedText = knowledgebase.map(item => item.knowledgebase).join('\r\n\r\n');
@@ -70,10 +52,13 @@ const GetAnswer = async (questions, knowledgebase) => {
 
 import express from 'express';
 const app = express()
+app.use(cors());
 app.use(express.json())
 const port = process.env.PORT || 3030
 
 app.get('/', (req, res) => {
+    console.log(res);
+
     console.log('berhasil berjalan');
 
     res.send('Hello World!')
