@@ -8,7 +8,6 @@ import * as fs from "fs"
 import * as dotenv from 'dotenv'
 dotenv.config()
 
-process.env.OPENAI_API_KEY = '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';
 
 const GetAnswer = async (questions, knowledgebase) => {
 
@@ -19,7 +18,6 @@ const GetAnswer = async (questions, knowledgebase) => {
 
     const model = new OpenAI({
         temperature: 0.9,
-        // OPENAI_API_KEY: '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'
     })
 
     // const text = fs.readFileSync("data.txt", "utf8")
@@ -57,7 +55,6 @@ app.use(express.json())
 const port = process.env.PORT || 3030
 
 app.get('/', (req, res) => {
-    console.log(res);
 
     console.log('berhasil berjalan');
 
